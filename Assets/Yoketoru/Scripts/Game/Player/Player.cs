@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,6 +18,9 @@ public class Player : MonoBehaviour, IGameStateListener
     }
 
     SimpleState<State> state = new(State.None);
+
+    Vector3 zahyou;
+    Vector3 kaiten;
 
     public UnityEvent<IGameStateListener> GameStateListenerDestroyed { get; private set; } = new();
 
@@ -41,6 +45,12 @@ public class Player : MonoBehaviour, IGameStateListener
     {
         // オブジェクトを消すときに、必ずInvokeする
         GameStateListenerDestroyed.Invoke(this);
+    }
+
+    void Awake()
+    {
+        zahyou = transform.position;
+        kaiten = transform.Find("Pivot").eulerAngles;
     }
 
     /// <summary>
@@ -74,6 +84,8 @@ public class Player : MonoBehaviour, IGameStateListener
 
             case State.Reset:
                 Debug.Log($"座標と向きを、Awakeで記録したものに戻す");
+                transform.position = new Vector3(0, 0, 0);
+                transform.Find("Pivot").eulerAngles = new Vector3(0, 0, 0);
                 break;
         }
     }
