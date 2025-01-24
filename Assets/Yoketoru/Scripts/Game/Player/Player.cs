@@ -63,7 +63,6 @@ public class Player : MonoBehaviour, IGameStateListener
                     = new Vector3(0, 0, -45);
                 transform.Translate(new Vector3(1, 1, 0));
                 break;
-                break;
 
             case State.Miss:
                 Debug.Log($"ミスの演出。なければ消す");
