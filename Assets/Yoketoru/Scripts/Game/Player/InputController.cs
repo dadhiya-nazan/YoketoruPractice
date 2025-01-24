@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public class InputController
@@ -14,7 +16,10 @@ public class InputController
     /// </summary>
     public void Update()
     {
-
+        for(int i = 0; i < inputs.Length; i++)
+        {
+            inputs[i].Update();
+        }
     }
 
     /// <summary>
@@ -23,6 +28,17 @@ public class InputController
     /// <returns>移動を指示するVector2の値</returns>
     public Vector2 GetValue()
     {
+        Vector2 Value = Vector2.zero;
+
         return Vector2.zero;
+        for (int i = 0; i < inputs.Length; i++)
+        {
+            var v = inputs[i].GetValue();
+            if (v magnitude > magnitude)
+            {
+                value = v;
+            }
+        }
+         return value;
     }
 }
